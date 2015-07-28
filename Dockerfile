@@ -5,7 +5,7 @@ EXPOSE 22 8080 9990
 
 # Adding users for maintenance
 RUN useradd -d /opt/jboss -s /bin/bash jboss
-RUN useradd -d /opt/jboss -s /bin/bash -G jboss publisher
+RUN useradd -d /opt/jboss/wildfly/standalone/deployments -s /bin/bash -G jboss publisher
 
 # Create deploy directories
 RUN mkdir -p /opt/oracle
