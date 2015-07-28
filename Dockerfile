@@ -8,7 +8,7 @@ RUN useradd -d /opt/jboss -s /bin/bash jboss
 RUN useradd -d /opt/jboss -s /bin/bash -G jboss publisher
 
 # Create deploy directories
-RUN mkdir -p /opt/jdk
+RUN mkdir -p /opt/oracle
 RUN mkdir -p /opt/jboss
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/wildfly
@@ -24,12 +24,15 @@ ADD sshd.conf /etc/supervisor/conf.d/sshd.conf
 ADD wildfly.conf /etc/supervisor/conf.d/wildfly.conf
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 
-RUN tar -zxf jdk-8u51-linux-x64.tar.gz -C /opt/jdk
+RUN tar -zxf jdk-8u51-linux-x64.tar.gz -C /opt/oracle
 RUN tar -zxf wildfly-8.2.1.Final.tar.gz -C /opt/jboss
 
-RUN update-alternatives --install /usr/bin/java java /opt/jdk/jdk1.8.0_51/bin/java 100
-ADD sqljdbc41.jar /opt/jboss/wildfly-8.2.1.Final/standalone/deployments/
-RUN touch /opt/jboss/wildfly-8.2.1.Final/standalone/deployments/sqljdbc41.jar.dodeploy
+RUN ln -s /opt/oracle/jdk1.8.0_51 /opt/oracle/jdk
+RUN ln -s /opt/jboss/wildfly-8.2.1.Final /opt/jboss/wildfly
+
+RUN update-alternatives --install /usr/bin/java java /opt/oracle/jdk/bin/java 100
+ADD sqljdbc41.jar /opt/jboss/wildfly/standalone/deployments/
+RUN touch /opt/jboss/wildfly/standalone/deployments/sqljdbc41.jar.dodeploy
 
 # Cleaning up unused files
 RUN rm jdk-8u51-linux-x64.tar.gz
@@ -39,7 +42,7 @@ RUN apt-get -y autoremove
 RUN apt-get clean
 
 # Setting appropriate user permissions
-RUN chown -R jboss:jboss /opt/jboss
+RUN chown -R jboss:jboss /opt/oracle
 RUN chown -R jboss:jboss /var/log/wildfly
 
 CMD supervisord -n
