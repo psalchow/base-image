@@ -43,6 +43,7 @@ RUN apt-get clean
 
 # Setting appropriate user permissions
 RUN chown -R jboss:jboss /opt/jboss
+RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chown -R jboss:jboss /var/log/wildfly
 
 CMD supervisord -n
