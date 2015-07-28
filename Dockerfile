@@ -42,7 +42,7 @@ RUN apt-get -y autoremove
 RUN apt-get clean
 
 # Setting appropriate user permissions
-RUN chown -R jboss:jboss /opt/oracle
+RUN chown -R jboss:jboss /opt/jboss
 RUN chown -R jboss:jboss /var/log/wildfly
 
 CMD supervisord -n
