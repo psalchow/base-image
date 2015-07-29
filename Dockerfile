@@ -8,7 +8,7 @@ ENV PASS=secret
 
 # Create deploy directories
 RUN mkdir -p /opt/oracle
-RUN mkdir -p /opt/jboss
+RUN mkdir -p /opt/jboss/configuration
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/wildfly
 
