@@ -11,6 +11,7 @@ RUN mkdir -p /opt/oracle
 RUN mkdir -p /opt/jboss/configuration
 RUN mkdir -p /var/run/sshd
 RUN mkdir -p /var/log/wildfly
+RUN mkdir -p /opt/share
 
 # Download and configure required software
 RUN apt-get update && apt-get -y install wget openssh-server supervisor
@@ -31,6 +32,7 @@ ADD wildfly.conf /etc/supervisor/conf.d/wildfly.conf
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD startup.sh /root/startup.sh
 ADD sqljdbc41.jar /opt/jboss/wildfly/standalone/deployments/
+RUN mkdir -p /opt/jboss/wildfly/standalone/deployments/deploy
 
 # Cleaning up unused files
 RUN rm jdk-8u51-linux-x64.tar.gz
@@ -47,6 +49,8 @@ RUN useradd -d /opt/jboss/wildfly/standalone/deployments -s /bin/bash -G jboss p
 RUN touch /opt/jboss/wildfly/standalone/deployments/sqljdbc41.jar.dodeploy
 RUN chown -R jboss:jboss /opt/jboss
 RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
+RUN chown -R jboss:jboss /opt/share
+RUN chomod -R 777 /opt/share
 RUN chown -R jboss:jboss /var/log/wildfly
 RUN chmod o+x /root/startup.sh
 
