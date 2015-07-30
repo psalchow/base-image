@@ -50,7 +50,7 @@ RUN touch /opt/jboss/wildfly/standalone/deployments/sqljdbc41.jar.dodeploy
 RUN chown -R jboss:jboss /opt/jboss
 RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chown -R jboss:jboss /opt/share
-RUN chomod -R 777 /opt/share
+RUN chmod -R 777 /opt/share
 RUN chown -R jboss:jboss /var/log/wildfly
 RUN chmod o+x /root/startup.sh
 
