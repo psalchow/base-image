@@ -39,6 +39,8 @@ RUN touch /opt/jboss/wildfly/standalone/deployments/sqljdbc41.jar.dodeploy
 RUN chown -R jboss:jboss /opt/jboss
 RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chown -R jboss:jboss /var/log/wildfly
-RUN chmod o+x /opt/jboss/startup.sh
+RUN chmod u+x /opt/jboss/startup.sh
+
+USER jboss
 
 CMD /opt/jboss/startup.sh
