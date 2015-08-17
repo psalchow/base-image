@@ -22,7 +22,7 @@ RUN ln -s /opt/jboss/wildfly-9.0.1.Final /opt/jboss/wildfly
 RUN update-alternatives --install /usr/bin/java java /opt/oracle/jdk/bin/java 100
 
 ADD sqljdbc41.jar /opt/jboss/wildfly/standalone/deployments/
-ADD startup.sh /root/startup.sh
+ADD startup.sh /opt/jboss/startup.sh
 
 # Cleaning up unused files
 RUN rm jdk-8u51-linux-x64.tar.gz
@@ -39,6 +39,6 @@ RUN touch /opt/jboss/wildfly/standalone/deployments/sqljdbc41.jar.dodeploy
 RUN chown -R jboss:jboss /opt/jboss
 RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chown -R jboss:jboss /var/log/wildfly
-RUN chmod o+x /root/startup.sh
+RUN chmod o+x /opt/jboss/startup.sh
 
-CMD /root/startup.sh
+CMD /opt/jboss/startup.sh
