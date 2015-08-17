@@ -41,6 +41,4 @@ RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chown -R jboss:jboss /var/log/wildfly
 RUN chmod o+x /root/startup.sh
 
-#USER jboss
-
 CMD /root/startup.sh
