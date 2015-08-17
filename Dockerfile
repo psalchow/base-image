@@ -5,6 +5,7 @@ EXPOSE 8080 9990
 
 # Create deploy directories
 RUN mkdir -p /opt/oracle
+RUN mkdir -p /opt/jboss
 RUN mkdir -p /var/log/wildfly
 
 # Download and configure required software

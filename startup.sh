@@ -8,4 +8,4 @@ then
         echo "Copied standalone_$ENV.xml to configuration folder"
 fi
 
-/opt/jboss/wildfly/standalone/standalone.sh
+/opt/jboss/wildfly/bin/standalone.sh
