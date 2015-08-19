@@ -35,7 +35,6 @@ RUN apt-get clean
 RUN useradd -d /opt/jboss -s /bin/bash jboss
 
 # Setting appropriate user permissions and deployabled
-RUN touch /opt/jboss/wildfly/standalone/deployments/sqljdbc41.jar.dodeploy
 RUN chown -R jboss:jboss /opt/jboss
 RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chown -R jboss:jboss /var/log/wildfly
