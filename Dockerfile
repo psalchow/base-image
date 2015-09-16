@@ -7,6 +7,7 @@ EXPOSE 8080 9990
 RUN mkdir -p /opt/oracle
 RUN mkdir -p /opt/jboss
 RUN mkdir -p /var/log/wildfly
+RUN mkdir -p /opt/shared
 
 # Download and configure required software
 RUN apt-get update && apt-get -y install wget
@@ -36,8 +37,9 @@ RUN useradd -d /opt/jboss -s /bin/bash jboss
 
 # Setting appropriate user permissions and deployabled
 RUN chown -R jboss:jboss /opt/jboss
-RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
+RUN chown -R jboss:jboss /opt/shared
 RUN chown -R jboss:jboss /var/log/wildfly
+RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
 RUN chmod u+x /opt/jboss/startup.sh
 
 USER jboss
