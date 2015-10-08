@@ -4,10 +4,10 @@ MAINTAINER Martin Verspai martin.verspai@iteratec.de
 EXPOSE 8080 9990
 
 # Create deploy directories
-RUN mkdir -p /opt/oracle
-RUN mkdir -p /opt/jboss
-RUN mkdir -p /var/log/wildfly
-RUN mkdir -p /opt/share
+RUN mkdir -p /opt/oracle && \
+    mkdir -p /opt/jboss && \
+    mkdir -p /var/log/wildfly && \
+    mkdir -p /opt/share
 
 # Download and configure required software
 RUN apt-get update && apt-get -y install wget
@@ -36,12 +36,14 @@ RUN apt-get clean
 RUN useradd -d /opt/jboss -s /bin/bash jboss
 
 # Setting appropriate user permissions and deployabled
-RUN chown -R jboss:jboss /opt/jboss
-RUN chmod g+w /opt/jboss/wildfly/standalone/deployments
-RUN chown -R jboss:jboss /opt/share
-RUN chmod -R 777 /opt/share
-RUN chown -R jboss:jboss /var/log/wildfly
-RUN chmod u+x /opt/jboss/startup.sh
+RUN chown -R jboss:jboss /opt/jboss && \
+    chmod g+w /opt/jboss/wildfly/standalone/deployments && \
+    chown -R jboss:jboss /opt/share && \
+    chmod -R 777 /opt/share && \
+    chown -R jboss:jboss /var/log/wildfly && \
+    chmod u+x /opt/jboss/startup.sh
+
+ADD additionalSystemProperties.properties /opt/jboss/
 
 USER jboss
 
