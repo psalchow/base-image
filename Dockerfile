@@ -24,6 +24,7 @@ RUN update-alternatives --install /usr/bin/java java /opt/oracle/jdk/bin/java 10
 
 ADD sqljdbc41.jar /opt/jboss/wildfly/standalone/deployments/
 ADD startup.sh /opt/jboss/startup.sh
+ADD application.properties /opt/jboss/
 
 # Cleaning up unused files
 RUN rm jdk-8u51-linux-x64.tar.gz
@@ -42,8 +43,6 @@ RUN chown -R jboss:jboss /opt/jboss && \
     chmod -R 777 /opt/share && \
     chown -R jboss:jboss /var/log/wildfly && \
     chmod u+x /opt/jboss/startup.sh
-
-ADD additionalSystemProperties.properties /opt/jboss/
 
 USER jboss
 
